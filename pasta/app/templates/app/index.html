@@ -1,0 +1,273 @@
+﻿{% extends "app/layout.html" %}
+
+{#-----------------------------------------------------------------------------#}
+{#- CONTENT -------------------------------------------------------------------#}
+{#-----------------------------------------------------------------------------#}
+{% block content %}
+
+<h1>{{ title }}</h1>
+<h4>
+    <small>{{ subtitle }}</small>
+</h4>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <canvas id="chart1" width="400" height="400"></canvas>
+        </div>
+        <div class="col-lg-6">
+            <canvas id="chart2" width="400" height="400"></canvas>
+        </div>
+        <div class="col-lg-6">
+            <canvas id="chart3" width="400" height="400"></canvas>
+        </div>
+        <div class="col-lg-6">
+            <canvas id="chart4" width="400" height="400"></canvas>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{#-----------------------------------------------------------------------------#}
+
+{#-----------------------------------------------------------------------------#}
+{#- SCRIPTS -------------------------------------------------------------------#}
+{#-----------------------------------------------------------------------------#}
+{%block scripts %}
+
+{% load staticfiles %}
+
+<script src="{% static 'app/scripts/chart.min.js' %}"></script>
+<script>
+    var chart1 = $("#chart1");
+    new Chart(chart1,
+    {
+        type: 'line',
+        data: {
+            labels: ["8.45.15", "8.45.16", "8.45.17", "8.50.1", "8.50.2"],
+            datasets: [
+                {
+                    label: "Körtid pl1303 (minuter)",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: [606, 610, 604, 175, 172],
+                    spanGaps: false
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                ]
+            },
+            responsive: false
+        }
+    });
+
+    var chart2 = $("#chart2");
+    new Chart(chart2,
+    {
+        type: 'bubble',
+        data: {
+            datasets: [
+                {
+                    label: 'Tid på dygnet',
+                    data: [
+                        {
+                            x: 12,
+                            y: 8,
+                            r: 15
+                        },
+                        {
+                            x: 12,
+                            y: 9,
+                            r: 15
+                        },
+                        {
+                            x: 12,
+                            y: 16,
+                            r: 15
+                        },
+                        {
+                            x: 12,
+                            y: 17,
+                            r: 15
+                        },
+                        {
+                            x: 13,
+                            y: 7,
+                            r: 15
+                        },
+                        {
+                            x: 13,
+                            y: 9,
+                            r: 15
+                        },
+                        {
+                            x: 13,
+                            y: 10,
+                            r: 15
+                        },
+                        {
+                            x: 15,
+                            y: 9,
+                            r: 15
+                        },
+                        {
+                            x: 15,
+                            y: 15,
+                            r: 15
+                        },
+                        {
+                            x: 16,
+                            y: 7,
+                            r: 15
+                        }
+                    ],
+                    backgroundColor: "#FF6384",
+                    hoverBackgroundColor: "#FF6384"
+                }
+            ]
+        },
+        options: {
+            elements: {
+                points: {
+                    borderWidth: 1,
+                    borderColor: 'rgb(0, 0, 0)'
+                }
+            },
+            scales: {
+                xAxes: [
+                    {
+                        ticks: {
+                            max: 16,
+                            min: 12,
+                            stepSize: 1
+                        }
+                    }
+                ],
+                yAxes: [
+                    {
+                        ticks: {
+                            max: 20,
+                            min: 6,
+                            stepSize: 1
+                        }
+                    }
+                ]
+            },
+            responsive: false
+        }
+    });
+
+    var chart3 = $("#chart3");
+    new Chart(chart3,
+    {
+        type: 'bar',
+        data: {
+            labels: ["pl1205", "pl1303", "pl9001", "pf1370", "pf4980"],
+            datasets: [
+                {
+                    label: "Antal körningar",
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1,
+                    data: [4, 7, 3, 4, 8]
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                ]
+            },
+            responsive: false
+        }
+    });
+
+    var chart4 = $("#chart4");
+    new Chart(chart4,
+    {
+        type: 'line',
+        data: {
+            labels: ["2013", "2014", "2015", "2016"],
+            datasets: [
+                {
+                    label: "Körningar utan varningar och fel",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: [0, 0, 0, 0],
+                    spanGaps: false
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            max: 5,
+                            stepSize: 1,
+                            beginAtZero: true
+                        }
+                    }
+                ]
+            },
+            responsive: false
+        }
+    });
+</script>
+
+{% endblock %}
+{#-----------------------------------------------------------------------------#}
